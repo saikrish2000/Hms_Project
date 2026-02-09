@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, Outlet } from "react-router-dom";
 import PatientSidebar from "./PatientSidebar";
 
-const PatientLayout = ({ children }) => {
+const PatientLayout = () => {
   const [collapsed, setCollapsed] = useState(() => {
     try {
       const saved = localStorage.getItem("sidebarCollapsed");
@@ -61,7 +61,7 @@ const PatientLayout = ({ children }) => {
       <main
         className={`flex-grow-1 p-4 bg-light ${collapsed ? "sidebar-collapsed" : ""}`}
       >
-        {children}
+        <Outlet />
       </main>
     </div>
   );

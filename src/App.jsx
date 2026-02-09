@@ -1,7 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { AuthProvider } from "./context/AuthContext";
+import { AdminProvider } from "./context/AdminContext";
 import Layout from "./components/Layout/Layout";
+import PatientLayout from "./components/Layout/PatientLayout";
+import AdminLayout from "./components/Layout/AdminLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 // Auth
@@ -32,6 +35,9 @@ import UrgentRequestCard from "./pages/Bloodbank/UrgentRequestCard";
 // Admin
 import AdminDashboard from "./pages/Admin/Dashboard";
 import UserManagement from "./pages/Admin/UserManagement";
+import HospitalManagement from "./pages/Admin/HospitalManagement";
+import AppointmentsManagement from "./pages/Admin/AppointmentsManagement";
+import ReportsAndAnalytics from "./pages/Admin/ReportsAndAnalytics";
 
 // Misc
 import EmergencyDemo from "./pages/EmergencyDemo";
@@ -44,15 +50,22 @@ import "./styles/card-ui.css";
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <Layout>
-          <Routes>
-            {/* Public */}
+      <AdminProvider>
+        <Router>
+        <Routes>
+          {/* ===================== PUBLIC ROUTES ===================== */}
+          <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/patient/find-doctor" element={<FindDoctor />} />
+            <Route path="/patient/blood-donation" element={<BloodDonation />} />
+            <Route path="/patient/book-appointment/:doctorId" element={<BookAppointment />} />
+            <Route path="/emergency" element={<EmergencyDemo />} />
+          </Route>
 
-            {/* Patient */}
+          {/* ===================== PATIENT ROUTES ===================== */}
+          <Route element={<PatientLayout />}>
             <Route
               path="/patient/dashboard"
               element={
@@ -61,9 +74,6 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            {/* ✅ PUBLIC: Users can see doctors without login, login required for booking */}
-            <Route path="/patient/find-doctor" element={<FindDoctor />} />
-
             <Route
               path="/patient/records"
               element={
@@ -72,7 +82,6 @@ function App() {
                 </ProtectedRoute>
               }
             />
-
             <Route
               path="/patient/profile"
               element={
@@ -80,12 +89,6 @@ function App() {
                   <PatientProfile />
                 </ProtectedRoute>
               }
-            />
-
-            {/* ✅ PUBLIC: Show booking form, auth check happens on submit */}
-            <Route
-              path="/patient/book-appointment/:doctorId"
-              element={<BookAppointment />}
             />
             <Route
               path="/patient/appointments"
@@ -95,10 +98,10 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            {/* ✅ PUBLIC: Users can see blood info, login required for donation */}
-            <Route path="/patient/blood-donation" element={<BloodDonation />} />
+          </Route>
 
-            {/* Doctor */}
+          {/* ===================== DOCTOR ROUTES ===================== */}
+          <Route element={<Layout />}>
             <Route
               path="/doctor/dashboard"
               element={
@@ -115,8 +118,10 @@ function App() {
                 </ProtectedRoute>
               }
             />
+          </Route>
 
-            {/* Blood Bank */}
+          {/* ===================== BLOOD BANK ROUTES ===================== */}
+          <Route element={<Layout />}>
             <Route
               path="/bloodbank/dashboard"
               element={
@@ -141,8 +146,10 @@ function App() {
                 </ProtectedRoute>
               }
             />
+          </Route>
 
-            {/* Admin */}
+          {/* ===================== ADMIN ROUTES ===================== */}
+          <Route element={<AdminLayout />}>
             <Route
               path="/admin/dashboard"
               element={
@@ -159,13 +166,39 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path="/admin/hospitals"
+              element={
+                <ProtectedRoute allowedRoles={["admin"]}>
+                  <HospitalManagement />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/appointments"
+              element={
+                <ProtectedRoute allowedRoles={["admin"]}>
+                  <AppointmentsManagement />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/reports"
+              element={
+                <ProtectedRoute allowedRoles={["admin"]}>
+                  <ReportsAndAnalytics />
+                </ProtectedRoute>
+              }
+            />
+          </Route>
 
-            {/* Other */}
-            <Route path="/emergency" element={<EmergencyDemo />} />
+          {/* ===================== 404 NOT FOUND ===================== */}
+          <Route element={<Layout />}>
             <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Layout>
+          </Route>
+        </Routes>
       </Router>
+      </AdminProvider>
     </AuthProvider>
   );
 }
