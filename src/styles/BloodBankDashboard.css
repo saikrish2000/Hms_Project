@@ -1,0 +1,318 @@
+/* src/styles/bloodBankDashboard.css */
+
+/* --- LAYOUT --- */
+.dashboard-layout {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  overflow: hidden;
+  background-color: #f8fafc;
+}
+
+/* --- SIDEBAR --- */
+.sidebar {
+  width: 260px;
+  background-color: #0f172a; /* Dark Navy */
+  color: #94a3b8;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+}
+
+.sidebar-header {
+  height: 70px;
+  display: flex;
+  align-items: center;
+  padding: 0 25px;
+  color: white;
+  font-weight: 700;
+  font-size: 1.3rem;
+  border-bottom: 1px solid #1e293b;
+  gap: 10px;
+}
+
+.sidebar-menu {
+  padding: 20px 15px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+  color: #94a3b8;
+}
+
+.menu-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: white;
+}
+
+.menu-item.active {
+  background: #0f766e; /* Teal Active State */
+  color: white;
+  font-weight: 600;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.badge {
+  background: #ef4444;
+  color: white;
+  font-size: 0.75rem;
+  padding: 2px 8px;
+  border-radius: 12px;
+  margin-left: auto;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+  padding: 20px;
+  border-top: 1px solid #1e293b;
+}
+
+.user-card {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #1e293b;
+  padding: 12px;
+  border-radius: 8px;
+}
+
+.user-avatar {
+  width: 35px;
+  height: 35px;
+  background: #0f766e;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 0.85rem;
+}
+
+/* --- MAIN CONTENT --- */
+.main-content {
+  flex: 1;
+  overflow-y: auto;
+  padding: 30px 40px;
+}
+
+/* Header */
+.page-header {
+  margin-bottom: 30px;
+}
+.page-header h1 {
+  margin: 0;
+  font-size: 2rem;
+  color: #1e293b;
+}
+.page-header p {
+  color: #64748b;
+  margin-top: 5px;
+}
+
+/* Stats Row */
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-bottom: 30px;
+}
+
+.stat-card {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  border: 1px solid #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.icon-box {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+.bg-red {
+  background: #ffe4e6;
+  color: #e11d48;
+}
+.bg-orange {
+  background: #ffedd5;
+  color: #ea580c;
+}
+.bg-green {
+  background: #dcfce7;
+  color: #16a34a;
+}
+.bg-blue {
+  background: #dbeafe;
+  color: #2563eb;
+}
+
+/* --- OVERVIEW SPECIFIC (Grid Layout) --- */
+.overview-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr; /* 2 Columns */
+  gap: 30px;
+}
+
+.dashboard-card {
+  background: white;
+  border-radius: 12px;
+  padding: 25px;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+}
+
+.dashboard-card h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #334155;
+}
+
+/* Big Action Buttons */
+.action-btn-large {
+  width: 100%;
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 700;
+  color: white;
+  cursor: pointer;
+  margin-bottom: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  transition: transform 0.2s;
+}
+.action-btn-large:hover {
+  transform: translateY(-2px);
+}
+
+.btn-teal {
+  background-color: #0f766e;
+}
+.btn-red {
+  background-color: #ef4444;
+}
+.btn-blue {
+  background-color: #3b82f6;
+}
+
+/* Recent Activity List */
+.activity-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.activity-item {
+  font-size: 0.95rem;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f1f5f9;
+  color: #334155;
+}
+.dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+.dot-red {
+  background: #ef4444;
+}
+.dot-green {
+  background: #16a34a;
+}
+
+/* --- OTHER VIEWS (Inventory, Requests) --- */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.inv-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  border: 1px solid #e2e8f0;
+  border-top: 4px solid #ddd;
+}
+.inv-card.good {
+  border-top-color: #16a34a;
+}
+.inv-card.low {
+  border-top-color: #eab308;
+}
+.inv-card.critical {
+  border-top-color: #ef4444;
+}
+
+.req-card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #e2e8f0;
+}
+
+/* Modals & Toasts (Standard) */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+}
+.modal-box {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  width: 400px;
+}
+.toast {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  padding: 15px 25px;
+  background: #333;
+  color: white;
+  border-radius: 8px;
+  z-index: 200;
+}
+.toast.success {
+  background: #10b981;
+}
+.toast.error {
+  background: #ef4444;
+}

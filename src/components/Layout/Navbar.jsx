@@ -20,34 +20,29 @@ const Navbar = () => {
           <span className="me-2">🏥</span>HealthHub
         </Link>
 
-        {/* CENTER: Home options (ONLY before login) */}
-        {!isAuthenticated && (
-          <ul className="navbar-nav mx-auto">
-            <li className="nav-item">
-              <Link className="nav-link" to="/patient/find-doctor">
-                Find Doctor
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/bloodbank/inventory">
-                Blood Bank
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/patient/organ-donation">
-                Organ Donation
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link
-                className="nav-link text-danger fw-semibold"
-                to="/emergency"
-              >
-                Emergency
-              </Link>
-            </li>
-          </ul>
-        )}
+        {/* CENTER: Navigation Links (ALWAYS VISIBLE) */}
+        <ul className="navbar-nav mx-auto">
+          <li className="nav-item">
+            <Link className="nav-link" to="/patient/find-doctor">
+              Find Doctor
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/patient/blood-donation">
+              Blood Bank
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/patient/organ-donation">
+              Organ Donation
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link text-danger fw-semibold" to="/emergency">
+              Emergency
+            </Link>
+          </li>
+        </ul>
 
         {/* RIGHT: Auth */}
         <div className="d-flex align-items-center gap-2">
@@ -65,7 +60,11 @@ const Navbar = () => {
           {isAuthenticated && (
             <>
               <Link
-                to={`/${user?.role}/dashboard`}
+                to={
+                  user?.role === "patient"
+                    ? "/patient/profile"
+                    : `/${user?.role}/dashboard`
+                }
                 className="btn btn-outline-primary"
               >
                 Profile

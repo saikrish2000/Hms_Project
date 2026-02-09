@@ -1,0 +1,33 @@
+/* ===================================
+   GLOBAL STYLES & UTILITIES
+   =================================== */
+
+#root {
+  width: 100%;
+}
+
+/* Utility Classes */
+
+/* Min height utility */
+.min-vh-100 {
+  min-height: 100vh;
+}
+
+/* Font weight utilities */
+.fw-500 {
+  font-weight: 500;
+}
+
+.fw-600 {
+  font-weight: 600;
+}
+
+/* Hover effect - lift and shadow animation */
+.hover-effect {
+  transition: all 0.3s ease;
+}
+
+.hover-effect:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15) !important;
+}

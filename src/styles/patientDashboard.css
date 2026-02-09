@@ -1,0 +1,79 @@
+/* ====== LAYOUT ====== */
+.patient-layout {
+  display: flex;
+  min-height: 100vh;
+  background: #f8fafc;
+}
+
+/* ====== SIDEBAR ====== */
+.sidebar {
+  width: 260px;
+  background: #ffffff;
+  border-right: 1px solid #e5e7eb;
+  padding: 1.5rem 1rem;
+  transition: width 0.3s ease;
+}
+
+.sidebar.collapsed {
+  width: 80px;
+}
+
+.sidebar .logo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-bottom: 6px;
+  color: #374151;
+}
+
+.sidebar li.active,
+.sidebar li:hover {
+  background: #e0f2fe;
+  color: #2563eb;
+}
+
+/* ====== MAIN CONTENT ====== */
+.patient-content {
+  flex: 1;
+  padding: 2rem;
+}
+
+/* ====== CARDS ====== */
+.dashboard-card {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.25rem;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.04);
+}
+
+.metric {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* ====== STATUS BADGES ====== */
+.badge-confirmed {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badge-pending {
+  background: #fef9c3;
+  color: #854d0e;
+}
