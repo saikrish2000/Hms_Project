@@ -35,10 +35,17 @@ const Home = () => {
 
               {!isAuthenticated ? (
                 <div className="d-flex gap-3 flex-wrap mb-4">
-                  <Link to="/patient/find-doctor" className="btn btn-success btn-lg">
+                  <Link
+                    to="/patient/find-doctor"
+                    className="btn btn-success btn-lg"
+                  >
                     Find a Doctor →
                   </Link>
-                  <Link to="/register" className="btn btn-outline-light btn-lg">
+
+                  <Link
+                    to="/register"
+                    className="btn btn-outline-light btn-lg"
+                  >
                     Get Started Free
                   </Link>
                 </div>
@@ -78,11 +85,12 @@ const Home = () => {
                   link="/patient/find-doctor"
                 />
 
+                {/* ✅ FIXED BLOOD DONATION NAVIGATION */}
                 <FeatureCard
                   icon={<MdWaterDrop size={28} className="text-danger" />}
                   title="Blood Donation"
                   desc="Donate blood or find donors in emergencies"
-                  link="/bloodbank/inventory"
+                  link="/patient/blood-donation"
                 />
 
                 <FeatureCard
@@ -149,10 +157,12 @@ const Home = () => {
 const FeatureCard = ({ icon, title, desc, link }) => {
   return (
     <Link to={link} className="text-decoration-none">
-      <div className="card border-0 shadow-sm">
+      <div className="card border-0 shadow-sm h-100">
         <div className="card-body d-flex align-items-center justify-content-between">
           <div className="d-flex align-items-center gap-3">
-            <div className="bg-light rounded-circle p-3">{icon}</div>
+            <div className="bg-light rounded-circle p-3">
+              {icon}
+            </div>
             <div>
               <h6 className="fw-bold mb-1">{title}</h6>
               <small className="text-muted">{desc}</small>

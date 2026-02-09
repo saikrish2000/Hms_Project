@@ -1,0 +1,43 @@
+/* ===================================
+   TOAST NOTIFICATION STYLES
+   Used for feedback messages and notifications
+   =================================== */
+
+/* Toast container - fixed position at bottom right */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 9999;
+}
+
+/* Toast card - dark notification box */
+.toast-card {
+  background: #111827;
+  color: #fff;
+  padding: 12px 16px;
+  border-radius: 8px;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+/* Toast actions container - holds buttons/action elements */
+.toast-actions {
+  display: flex;
+  gap: 8px;
+}
+
+/* Undo button in toast - green accent */
+.toast-undo {
+  background: transparent;
+  border: none;
+  color: #22c55e;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.toast-undo:hover {
+  color: #16a34a;
+}

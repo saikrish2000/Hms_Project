@@ -1,0 +1,31 @@
+/* ===================================
+   TIMELINE STYLES
+   Used in Dashboard for Medical History display
+   =================================== */
+
+/* Timeline container - vertical timeline with left border */
+.timeline {
+  position: relative;
+  border-left: 2px solid #e5e7eb;
+  padding-left: 24px;
+}
+
+/* Individual timeline item */
+.timeline-item {
+  margin-bottom: 24px;
+}
+
+/* Timeline date/label - timestamp for each event */
+.timeline-date {
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-bottom: 6px;
+}
+
+/* Timeline content - card/box for event details */
+.timeline-content {
+  background: #fff;
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}

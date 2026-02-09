@@ -1,0 +1,85 @@
+.card-shell {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 18px 20px;
+  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+}
+
+.card-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.card-left {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.card-avatar {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.card-title {
+  font-weight: 600;
+  font-size: 16px;
+  color: #0f172a;
+}
+
+.card-sub {
+  font-size: 13px;
+  color: #64748b;
+}
+
+.card-meta {
+  display: flex;
+  gap: 16px;
+  font-size: 13px;
+  color: #475569;
+  margin-top: 6px;
+}
+
+.badge-status {
+  padding: 4px 10px;
+  font-size: 12px;
+  border-radius: 999px;
+  font-weight: 500;
+}
+
+.badge-confirmed {
+  background: #ecfdf5;
+  color: #059669;
+}
+
+.badge-pending {
+  background: #fff7ed;
+  color: #d97706;
+}
+
+.card-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.btn-outline {
+  border: 1px solid #e5e7eb;
+  background: white;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.btn-danger-text {
+  color: #dc2626;
+  background: transparent;
+  border: none;
+  font-size: 13px;
+  cursor: pointer;
+}

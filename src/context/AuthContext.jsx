@@ -2,7 +2,7 @@ import { createContext, useContext, useState } from "react";
 
 const AuthContext = createContext(null);
 
-// Small in-memory user store for local testing. Replace with real API in production.
+/* MOCK USERS (API READY) */
 const MOCK_USERS = [
   {
     id: "p1",
@@ -18,6 +18,7 @@ const MOCK_USERS = [
     email: "doctor@example.com",
     password: "doctor123",
     role: "doctor",
+    approved: true, // ✅ Approved for testing
     phone: "+10000000002",
   },
   {
@@ -44,17 +45,21 @@ export const AuthProvider = ({ children }) => {
     return stored ? JSON.parse(stored) : null;
   });
 
+  /* LOGIN */
   const login = async (email, password) => {
-    // Simulate API delay
     await new Promise((res) => setTimeout(res, 300));
 
     const found = MOCK_USERS.find(
       (u) => u.email === email && u.password === password,
     );
+
     if (!found) {
-      const err = new Error("Invalid credentials");
-      err.code = "INVALID_CREDENTIALS";
-      throw err;
+      throw new Error("Invalid credentials");
+    }
+
+    /* 🔐 Doctor approval check */
+    if (found.role === "doctor" && !found.approved) {
+      throw new Error("Doctor account pending approval by admin");
     }
 
     const safeUser = {
@@ -63,26 +68,32 @@ export const AuthProvider = ({ children }) => {
       email: found.email,
       role: found.role,
       phone: found.phone,
+      approved: found.approved !== false, // ✅ Include approval status
     };
+
     setUser(safeUser);
     localStorage.setItem("user", JSON.stringify(safeUser));
+
     return safeUser;
   };
 
+  /* REGISTER */
   const register = async (userData) => {
-    // In a real app this would call an API. Here we simply add to local storage and set user.
     const newUser = {
       id: Date.now().toString(),
       name: userData.name || "New User",
       email: userData.email,
       role: userData.role || "patient",
+      approved: userData.role !== "doctor", // doctors need approval
       phone: userData.phone || "",
     };
+
     setUser(newUser);
     localStorage.setItem("user", JSON.stringify(newUser));
     return newUser;
   };
 
+  /* LOGOUT */
   const logout = () => {
     setUser(null);
     localStorage.removeItem("user");
@@ -90,7 +101,13 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, isAuthenticated: !!user, login, register, logout }}
+      value={{
+        user,
+        isAuthenticated: !!user,
+        login,
+        register,
+        logout,
+      }}
     >
       {children}
     </AuthContext.Provider>
@@ -99,6 +116,8 @@ export const AuthProvider = ({ children }) => {
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
-  if (!context) throw new Error("useAuth must be used within AuthProvider");
+  if (!context) {
+    throw new Error("useAuth must be used within AuthProvider");
+  }
   return context;
 };
