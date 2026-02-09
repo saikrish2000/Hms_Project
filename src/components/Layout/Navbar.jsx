@@ -20,32 +20,34 @@ const Navbar = () => {
           <span className="me-2">🏥</span>HealthHub
         </Link>
 
-        {/* CENTER: Navigation Links (ALWAYS VISIBLE) */}
-        <ul className="navbar-nav mx-auto">
-          <li className="nav-item">
-            <Link className="nav-link" to="/patient/find-doctor">
-              Find Doctor
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/patient/blood-donation">
-              Blood Bank
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link" to="/patient/organ-donation">
-              Organ Donation
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link text-danger fw-semibold" to="/emergency">
-              Emergency
-            </Link>
-          </li>
-        </ul>
+        {/* CENTER: Navigation Links - Only for Non-Blood Bank Users */}
+        {user?.role !== "bloodbank" && (
+          <ul className="navbar-nav mx-auto">
+            <li className="nav-item">
+              <Link className="nav-link" to="/patient/find-doctor">
+                Find Doctor
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/patient/blood-donation">
+                Blood Bank
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/patient/organ-donation">
+                Organ Donation
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link text-danger fw-semibold" to="/emergency">
+                Emergency
+              </Link>
+            </li>
+          </ul>
+        )}
 
         {/* RIGHT: Auth */}
-        <div className="d-flex align-items-center gap-2">
+        <div className="d-flex align-items-center gap-2 ms-auto">
           {!isAuthenticated && (
             <>
               <Link to="/login" className="btn btn-outline-primary">
@@ -59,19 +61,27 @@ const Navbar = () => {
 
           {isAuthenticated && (
             <>
-              <Link
-                to={
-                  user?.role === "patient"
-                    ? "/patient/profile"
-                    : `/${user?.role}/dashboard`
-                }
-                className="btn btn-outline-primary"
-              >
-                Profile
-              </Link>
-              <button onClick={handleLogout} className="btn btn-outline-danger">
-                Logout
-              </button>
+              {user?.role === "bloodbank" ? (
+                <button onClick={handleLogout} className="btn btn-outline-danger">
+                  <FiLogOut className="me-1" /> Logout
+                </button>
+              ) : (
+                <>
+                  <Link
+                    to={
+                      user?.role === "patient"
+                        ? "/patient/profile"
+                        : `/${user?.role}/dashboard`
+                    }
+                    className="btn btn-outline-primary"
+                  >
+                    Profile
+                  </Link>
+                  <button onClick={handleLogout} className="btn btn-outline-danger">
+                    Logout
+                  </button>
+                </>
+              )}
             </>
           )}
         </div>
