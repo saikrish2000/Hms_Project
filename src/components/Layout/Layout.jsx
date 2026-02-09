@@ -1,9 +1,9 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, Outlet } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
-const Layout = ({ children }) => {
+const Layout = () => {
   const location = useLocation();
   const { isAuthenticated } = useAuth();
 
@@ -17,7 +17,9 @@ const Layout = ({ children }) => {
       {/* Navbar is always visible */}
       <Navbar />
 
-      <main className="flex-grow-1">{children}</main>
+      <main className="flex-grow-1">
+        <Outlet />
+      </main>
 
       {/* Footer hidden conditionally */}
       {!hideFooter && <Footer />}

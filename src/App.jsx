@@ -1,7 +1,10 @@
 /* eslint-disable no-unused-vars */
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
+import { AdminProvider } from "./context/AdminContext";
 import Layout from "./components/Layout/Layout";
+import PatientLayout from "./components/Layout/PatientLayout";
+import AdminLayout from "./components/Layout/AdminLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 // Auth
@@ -34,81 +37,156 @@ import ManageInventory from "./pages/Bloodbank/ManageInventory";
 // Admin
 import AdminDashboard from "./pages/Admin/Dashboard";
 import UserManagement from "./pages/Admin/UserManagement";
+import HospitalManagement from "./pages/Admin/HospitalManagement";
+import AppointmentsManagement from "./pages/Admin/AppointmentsManagement";
+import ReportsAndAnalytics from "./pages/Admin/ReportsAndAnalytics";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
-import "./styles/card-ui.css";
-
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <Layout>
+      <AdminProvider>
+        <Router>
           <Routes>
-            {/* Public Routes */}
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-            <Route path="/emergency" element={<EmergencyDemo />} />
+            {/* ===================== PUBLIC ROUTES ===================== */}
+            <Route element={<Layout />}>
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/register" element={<Register />} />
+              <Route path="/emergency" element={<EmergencyDemo />} />
+              <Route path="/organ-donation" element={<OrganDonation />} />
+              <Route path="/patient/find-doctor" element={<FindDoctor />} />
+              <Route path="/patient/blood-donation" element={<BloodDonation />} />
+              <Route path="/patient/book-appointment/:doctorId" element={<BookAppointment />} />
+            </Route>
 
-            {/* Organ Donation */}
-            <Route path="/organ-donation" element={<OrganDonation />} />
+            {/* ===================== PATIENT ROUTES ===================== */}
+            <Route element={<PatientLayout />}>
+              <Route
+                path="/patient/dashboard"
+                element={
+                  <ProtectedRoute allowedRoles={["patient"]}>
+                    <PatientDashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/patient/records"
+                element={
+                  <ProtectedRoute allowedRoles={["patient"]}>
+                    <PatientRecords />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/patient/profile"
+                element={
+                  <ProtectedRoute allowedRoles={["patient"]}>
+                    <PatientProfile />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/patient/appointments"
+                element={
+                  <ProtectedRoute allowedRoles={["patient"]}>
+                    <PatientAppointments />
+                  </ProtectedRoute>
+                }
+              />
+            </Route>
 
-            {/* Patient Routes */}
-            <Route path="/patient/dashboard" element={<PatientDashboard />} />
-            <Route path="/patient/find-doctor" element={<FindDoctor />} />
-            <Route path="/patient/book-appointment/:doctorId" element={<BookAppointment />} />
-            <Route path="/patient/appointments" element={<PatientAppointments />} />
+            {/* ===================== DOCTOR ROUTES ===================== */}
+            <Route element={<Layout />}>
+              <Route
+                path="/doctor/dashboard"
+                element={
+                  <ProtectedRoute allowedRoles={["doctor"]}>
+                    <DoctorDashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/doctor/appointments"
+                element={
+                  <ProtectedRoute allowedRoles={["doctor"]}>
+                    <ManageAppointments />
+                  </ProtectedRoute>
+                }
+              />
+            </Route>
 
-            <Route
-              path="/patient/records"
-              element={
-                <ProtectedRoute allowedRoles={["patient"]}>
-                  <PatientRecords />
-                </ProtectedRoute>
-              }
-            />
+            {/* ===================== BLOOD BANK ROUTES ===================== */}
+            <Route element={<Layout />}>
+              <Route
+                path="/bloodbank/dashboard"
+                element={
+                  <ProtectedRoute allowedRoles={["bloodbank"]}>
+                    <BloodBankDashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/bloodbank/inventory"
+                element={
+                  <ProtectedRoute allowedRoles={["bloodbank"]}>
+                    <ManageInventory />
+                  </ProtectedRoute>
+                }
+              />
+            </Route>
 
-            <Route
-              path="/patient/profile"
-              element={
-                <ProtectedRoute allowedRoles={["patient"]}>
-                  <PatientProfile />
-                </ProtectedRoute>
-              }
-            />
+            {/* ===================== ADMIN ROUTES ===================== */}
+            <Route element={<AdminLayout />}>
+              <Route
+                path="/admin/dashboard"
+                element={
+                  <ProtectedRoute allowedRoles={["admin"]}>
+                    <AdminDashboard />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/users"
+                element={
+                  <ProtectedRoute allowedRoles={["admin"]}>
+                    <UserManagement />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/hospitals"
+                element={
+                  <ProtectedRoute allowedRoles={["admin"]}>
+                    <HospitalManagement />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/appointments"
+                element={
+                  <ProtectedRoute allowedRoles={["admin"]}>
+                    <AppointmentsManagement />
+                  </ProtectedRoute>
+                }
+              />
+              <Route
+                path="/admin/reports"
+                element={
+                  <ProtectedRoute allowedRoles={["admin"]}>
+                    <ReportsAndAnalytics />
+                  </ProtectedRoute>
+                }
+              />
+            </Route>
 
-            {/* Doctor Routes */}
-            <Route path="/doctor/dashboard" element={<DoctorDashboard />} />
-            <Route
-              path="/doctor/appointments"
-              element={
-                <ProtectedRoute allowedRoles={["doctor"]}>
-                  <ManageAppointments />
-                </ProtectedRoute>
-              }
-            />
-
-            {/* Blood Bank Routes */}
-            <Route
-              path="/bloodbank/dashboard"
-              element={
-                <ProtectedRoute allowedRoles={["bloodbank"]}>
-                  <BloodBankDashboard />
-                </ProtectedRoute>
-              }
-            />
-            <Route path="/bloodbank/inventory" element={<ManageInventory />} />
-
-            {/* Admin Routes */}
-            <Route path="/admin/dashboard" element={<AdminDashboard />} />
-            <Route path="/admin/users" element={<UserManagement />} />
-
-            {/* 404 */}
-            <Route path="*" element={<NotFound />} />
+            {/* ===================== 404 NOT FOUND ===================== */}
+            <Route element={<Layout />}>
+              <Route path="*" element={<NotFound />} />
+            </Route>
           </Routes>
-        </Layout>
-      </Router>
+        </Router>
+      </AdminProvider>
     </AuthProvider>
   );
 }
