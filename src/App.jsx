@@ -30,9 +30,19 @@ import PatientProfile from "./pages/Patient/Profile";
 import DoctorDashboard from "./pages/Doctor/Dashboard";
 import ManageAppointments from "./pages/Doctor/ManageAppointments";
 
+
 // Blood Bank
 import BloodBankDashboard from "./pages/Bloodbank/Dashboard";
 import ManageInventory from "./pages/Bloodbank/ManageInventory";
+import UrgentRequests from "./pages/Bloodbank/UrgentRequests";
+import Donors from "./pages/Bloodbank/Donors";
+import BloodBankProfile from "./pages/Bloodbank/Profile";
+
+
+
+
+
+
 
 // Admin
 import AdminDashboard from "./pages/Admin/Dashboard";
