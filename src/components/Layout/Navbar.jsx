@@ -1,41 +1,52 @@
-/* eslint-disable no-unused-vars */
-import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
-import { FaHeart } from "react-icons/fa";
 import { FiLogOut, FiUser } from "react-icons/fi";
-
+import "bootstrap/dist/css/bootstrap.min.css";
+ 
 const Navbar = () => {
   const { user, isAuthenticated, logout } = useAuth();
   const navigate = useNavigate();
-
+ 
   const handleLogout = () => {
     logout();
     navigate("/");
   };
-
-  // Role-based profile route
-  const profileRoute = user?.role === "patient"
-    ? "/patient/profile"
-    : user?.role === "admin"
-      ? "/admin/dashboard"
-      : `/${user?.role}/dashboard`;
-
+ 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
       <div className="container-fluid">
-        <Link to="/" className="navbar-brand d-flex align-items-center fw-bold text-primary">
-          <div className="me-2">
-            <FaHeart className="text-primary" />
-          </div>
-          HealthHub
+        {/* LEFT: Brand */}
+        <Link to="/" className="navbar-brand fw-bold text-primary">
+          <span className="me-2">🏥</span>HealthHub
         </Link>
-
-        {/* CENTER: no global patient links; keep center empty for layout */}
-        <ul className="navbar-nav mx-auto"></ul>
-
-        <div className="d-flex align-items-center gap-2 ms-auto">
-          {!isAuthenticated ? (
+ 
+        {/* CENTER: Navigation Links (ALWAYS VISIBLE) */}
+        <ul className="navbar-nav mx-auto">
+          <li className="nav-item">
+            <Link className="nav-link" to="/patient/find-doctor">
+              Find Doctor
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/patient/blood-donation">
+              Blood Bank
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/patient/organ-donation">
+              Organ Donation
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link text-danger fw-semibold" to="/emergency">
+              Emergency
+            </Link>
+          </li>
+        </ul>
+ 
+        {/* RIGHT: Auth */}
+        <div className="d-flex align-items-center gap-2">
+          {!isAuthenticated && (
             <>
               <Link to="/login" className="btn btn-outline-primary">
                 Login
@@ -44,14 +55,22 @@ const Navbar = () => {
                 Register
               </Link>
             </>
-          ) : (
+          )}
+ 
+          {isAuthenticated && (
             <>
-              <Link to={profileRoute} className="btn btn-outline-primary">
-                <FiUser className="me-1" />
-                {user?.name?.split(" ")[0] || "Profile"}
+              <Link
+                to={
+                  user?.role === "patient"
+                    ? "/patient/profile"
+                    : `/${user?.role}/dashboard`
+                }
+                className="btn btn-outline-primary"
+              >
+                Profile
               </Link>
               <button onClick={handleLogout} className="btn btn-outline-danger">
-                <FiLogOut className="me-1" /> Logout
+                Logout
               </button>
             </>
           )}
@@ -60,5 +79,3 @@ const Navbar = () => {
     </nav>
   );
 };
-
-export default Navbar;
