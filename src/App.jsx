@@ -1,7 +1,10 @@
 /* eslint-disable no-unused-vars */
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
+import { AdminProvider } from "./context/AdminContext";
 import Layout from "./components/Layout/Layout";
+import PatientLayout from "./components/Layout/PatientLayout";
+import AdminLayout from "./components/Layout/AdminLayout";
 import ProtectedRoute from "./components/ProtectedRoute";
 
 // Auth
@@ -27,39 +30,55 @@ import PatientProfile from "./pages/Patient/Profile";
 import DoctorDashboard from "./pages/Doctor/Dashboard";
 import ManageAppointments from "./pages/Doctor/ManageAppointments";
 
+
 // Blood Bank
 import BloodBankDashboard from "./pages/Bloodbank/Dashboard";
 import ManageInventory from "./pages/Bloodbank/ManageInventory";
+import UrgentRequests from "./pages/Bloodbank/UrgentRequests";
+import Donors from "./pages/Bloodbank/Donors";
+import BloodBankProfile from "./pages/Bloodbank/Profile";
+
+
+
+
+
+
 
 // Admin
 import AdminDashboard from "./pages/Admin/Dashboard";
 import UserManagement from "./pages/Admin/UserManagement";
+import HospitalManagement from "./pages/Admin/HospitalManagement";
+import AppointmentsManagement from "./pages/Admin/AppointmentsManagement";
+import ReportsAndAnalytics from "./pages/Admin/ReportsAndAnalytics";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
-import "./styles/card-ui.css";
-
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <Layout>
+      <AdminProvider>
+        <Router>
           <Routes>
-            {/* Public Routes */}
+          {/* ===================== PUBLIC ROUTES ===================== */}
+          <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-            <Route path="/emergency" element={<EmergencyDemo />} />
-
-            {/* Organ Donation */}
-            <Route path="/organ-donation" element={<OrganDonation />} />
-
-            {/* Patient Routes */}
-            <Route path="/patient/dashboard" element={<PatientDashboard />} />
             <Route path="/patient/find-doctor" element={<FindDoctor />} />
+            <Route path="/patient/blood-donation" element={<BloodDonation />} />
             <Route path="/patient/book-appointment/:doctorId" element={<BookAppointment />} />
-            <Route path="/patient/appointments" element={<PatientAppointments />} />
+            <Route path="/emergency" element={<EmergencyDemo />} />
+          </Route>
 
+          {/* ===================== PATIENT ROUTES ===================== */}
+          <Route element={<PatientLayout />}>
+            <Route
+              path="/patient/dashboard"
+              element={
+                <ProtectedRoute allowedRoles={["patient"]}>
+                  <PatientDashboard />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="/patient/records"
               element={
@@ -68,7 +87,6 @@ function App() {
                 </ProtectedRoute>
               }
             />
-
             <Route
               path="/patient/profile"
               element={
@@ -77,9 +95,26 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route
+              path="/patient/appointments"
+              element={
+                <ProtectedRoute allowedRoles={["patient"]}>
+                  <PatientAppointments />
+                </ProtectedRoute>
+              }
+            />
+          </Route>
 
-            {/* Doctor Routes */}
-            <Route path="/doctor/dashboard" element={<DoctorDashboard />} />
+          {/* ===================== DOCTOR ROUTES ===================== */}
+          <Route element={<Layout />}>
+            <Route
+              path="/doctor/dashboard"
+              element={
+                <ProtectedRoute allowedRoles={["doctor"]}>
+                  <DoctorDashboard />
+                </ProtectedRoute>
+              }
+            />
             <Route
               path="/doctor/appointments"
               element={
@@ -88,8 +123,10 @@ function App() {
                 </ProtectedRoute>
               }
             />
+          </Route>
 
-            {/* Blood Bank Routes */}
+          {/* ===================== BLOOD BANK ROUTES ===================== */}
+          <Route element={<Layout />}>
             <Route
               path="/bloodbank/dashboard"
               element={
@@ -98,17 +135,91 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route path="/bloodbank/inventory" element={<ManageInventory />} />
+            <Route
+              path="/bloodbank/inventory"
+              element={
+                <ProtectedRoute allowedRoles={["bloodbank"]}>
+                  <ManageInventory />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/bloodbank/urgent-requests"
+              element={
+                <ProtectedRoute allowedRoles={["bloodbank"]}>
+                  <UrgentRequests />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/bloodbank/donors"
+              element={
+                <ProtectedRoute allowedRoles={["bloodbank"]}>
+                  <Donors />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/bloodbank/profile"
+              element={
+                <ProtectedRoute allowedRoles={["bloodbank"]}>
+                  <BloodBankProfile />
+                </ProtectedRoute>
+              }
+            />
+          </Route>
 
-            {/* Admin Routes */}
-            <Route path="/admin/dashboard" element={<AdminDashboard />} />
-            <Route path="/admin/users" element={<UserManagement />} />
+          {/* ===================== ADMIN ROUTES ===================== */}
+          <Route element={<AdminLayout />}>
+            <Route
+              path="/admin/dashboard"
+              element={
+                <ProtectedRoute allowedRoles={["admin"]}>
+                  <AdminDashboard />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/users"
+              element={
+                <ProtectedRoute allowedRoles={["admin"]}>
+                  <UserManagement />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/hospitals"
+              element={
+                <ProtectedRoute allowedRoles={["admin"]}>
+                  <HospitalManagement />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/appointments"
+              element={
+                <ProtectedRoute allowedRoles={["admin"]}>
+                  <AppointmentsManagement />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/reports"
+              element={
+                <ProtectedRoute allowedRoles={["admin"]}>
+                  <ReportsAndAnalytics />
+                </ProtectedRoute>
+              }
+            />
+          </Route>
 
-            {/* 404 */}
+          {/* ===================== 404 NOT FOUND ===================== */}
+          <Route element={<Layout />}>
             <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Layout>
+          </Route>
+        </Routes>
       </Router>
+      </AdminProvider>
     </AuthProvider>
   );
 }
