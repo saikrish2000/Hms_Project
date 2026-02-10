@@ -1,0 +1,95 @@
+/* NAVBAR BASE */
+.hh-navbar {
+    background: #dcfce7;
+    padding: 14px 0;
+}
+
+.hh-container {
+    max-width: 1200px;
+    margin: auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* LOGO */
+.hh-logo {
+    display: flex;
+    align-items: center;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #065f46;
+    text-decoration: none;
+}
+
+.hh-logo-icon {
+    background: #0ea5e9;
+    color: white;
+    padding: 6px 10px;
+    border-radius: 12px;
+    margin-right: 8px;
+}
+
+/* LINKS */
+.hh-links {
+    display: flex;
+    gap: 18px;
+}
+
+.hh-link {
+    text-decoration: none;
+    color: #475569;
+    font-weight: 500;
+    padding: 8px 14px;
+    border-radius: 999px;
+    transition: all 0.2s ease;
+}
+
+.hh-link:hover {
+    background: #bbf7d0;
+    color: #065f46;
+}
+
+.hh-link.active {
+    background: #bbf7d0;
+    color: #047857;
+    font-weight: 600;
+}
+
+/* Emergency */
+.hh-link.emergency {
+    color: #64748b;
+}
+
+.hh-link.emergency:hover {
+    color: #dc2626;
+    background: #fee2e2;
+}
+
+/* ACTION BUTTONS */
+.hh-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.hh-login {
+    color: #111827;
+    text-decoration: none;
+    font-weight: 500;
+    padding: 8px 16px;
+    border-radius: 10px;
+}
+
+.hh-register {
+    background: #0d9488;
+    color: white;
+    padding: 8px 18px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.hh-register:hover {
+    background: #0f766e;
+}

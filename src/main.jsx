@@ -1,7 +1,9 @@
+/* eslint-disable no-unused-vars */
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "./index.css";
 import App from "./App.jsx";
+import "bootstrap/dist/js/bootstrap.bundle.min.js";
 import { NotificationProvider } from "./context/NotificationContext.jsx";
 import { AppointmentsProvider } from "./context/AppointmentsContext.jsx";
 import { BloodBankProvider } from "./context/BloodBankContext.jsx";

@@ -1,7 +1,9 @@
+/* eslint-disable no-unused-vars */
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
+import { FaHeart } from "react-icons/fa";
 import { FiLogOut, FiUser } from "react-icons/fi";
-import "bootstrap/dist/css/bootstrap.min.css";
 
 const Navbar = () => {
   const { user, isAuthenticated, logout } = useAuth();
@@ -12,20 +14,28 @@ const Navbar = () => {
     navigate("/");
   };
 
+  // Role-based profile route
+  const profileRoute = user?.role === "patient"
+    ? "/patient/profile"
+    : user?.role === "admin"
+      ? "/admin/dashboard"
+      : `/${user?.role}/dashboard`;
+
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
       <div className="container-fluid">
-        {/* LEFT: Brand */}
-        <Link to="/" className="navbar-brand fw-bold text-primary">
-          <span className="me-2">🏥</span>HealthHub
+        <Link to="/" className="navbar-brand d-flex align-items-center fw-bold text-primary">
+          <div className="me-2">
+            <FaHeart className="text-primary" />
+          </div>
+          HealthHub
         </Link>
 
-        {/* CENTER */}
+        {/* CENTER: no global patient links; keep center empty for layout */}
         <ul className="navbar-nav mx-auto"></ul>
 
-        {/* RIGHT */}
         <div className="d-flex align-items-center gap-2 ms-auto">
-          {!isAuthenticated && (
+          {!isAuthenticated ? (
             <>
               <Link to="/login" className="btn btn-outline-primary">
                 Login
@@ -34,22 +44,14 @@ const Navbar = () => {
                 Register
               </Link>
             </>
-          )}
-
-          {isAuthenticated && (
+          ) : (
             <>
-              <Link
-                to={
-                  user?.role === "patient"
-                    ? "/patient/profile"
-                    : `/${user?.role}/dashboard`
-                }
-                className="btn btn-outline-primary"
-              >
-                Profile
+              <Link to={profileRoute} className="btn btn-outline-primary">
+                <FiUser className="me-1" />
+                {user?.name?.split(" ")[0] || "Profile"}
               </Link>
               <button onClick={handleLogout} className="btn btn-outline-danger">
-                Logout
+                <FiLogOut className="me-1" /> Logout
               </button>
             </>
           )}

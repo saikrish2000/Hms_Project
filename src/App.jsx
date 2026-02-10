@@ -1,5 +1,5 @@
+/* eslint-disable no-unused-vars */
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-
 import { AuthProvider } from "./context/AuthContext";
 import { AdminProvider } from "./context/AdminContext";
 import Layout from "./components/Layout/Layout";
@@ -13,6 +13,9 @@ import Register from "./components/Auth/Register";
 
 // Common
 import Home from "./pages/Home";
+import EmergencyDemo from "./pages/EmergencyDemo";
+import NotFound from "./pages/NotFound";
+import OrganDonation from "./pages/OrganDonation/OrganDonation";
 
 // Patient
 import PatientDashboard from "./pages/Patient/Dashboard";
@@ -30,9 +33,6 @@ import ManageAppointments from "./pages/Doctor/ManageAppointments";
 // Blood Bank
 import BloodBankDashboard from "./pages/Bloodbank/Dashboard";
 import ManageInventory from "./pages/Bloodbank/ManageInventory";
-import UrgentRequests from "./pages/Bloodbank/UrgentRequests";
-import Donors from "./pages/Bloodbank/Donors";
-import BloodBankProfile from "./pages/Bloodbank/Profile";
 
 // Admin
 import AdminDashboard from "./pages/Admin/Dashboard";
@@ -41,20 +41,13 @@ import HospitalManagement from "./pages/Admin/HospitalManagement";
 import AppointmentsManagement from "./pages/Admin/AppointmentsManagement";
 import ReportsAndAnalytics from "./pages/Admin/ReportsAndAnalytics";
 
-// Misc
-import EmergencyDemo from "./pages/EmergencyDemo";
-import NotFound from "./pages/NotFound";
-
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./App.css";
-import "./styles/card-ui.css";
-
 function App() {
   return (
     <AuthProvider>
       <AdminProvider>
         <Router>
-        <Routes>
+          <Routes>
           {/* ===================== PUBLIC ROUTES ===================== */}
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
@@ -222,3 +215,4 @@ function App() {
 }
 
 export default App;
+  
