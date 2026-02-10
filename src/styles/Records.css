@@ -1,0 +1,39 @@
+/* ===================================
+   RECORDS PAGE STYLES
+   Used in Patient Records/Medical Records view
+   =================================== */
+
+/* Record card - layout for individual medical record */
+.record-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 14px;
+  border-radius: 8px;
+  box-shadow: 0 6px 18px rgba(13, 52, 120, 0.06);
+}
+
+/* Record left section - record information */
+.record-left {
+  flex: 1;
+}
+
+/* Record title - name of the record/document */
+.record-title {
+  font-weight: 600;
+}
+
+/* Record metadata - doctor name, date, type */
+.record-meta {
+  color: #6b7280;
+  font-size: 0.9rem;
+}
+
+/* Record actions - buttons for record operations */
+.record-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-left: 16px;
+}

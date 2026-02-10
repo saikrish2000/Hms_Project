@@ -1,0 +1,695 @@
+/* src/styles/bloodDonation.css */
+
+/* --- HERO SECTION --- */
+.blood-hero {
+  background: linear-gradient(135deg, #ff4b4b 0%, #ff1f1f 100%);
+  padding: 60px 5% 100px 5%;
+  color: white;
+  display: flex;
+  justify-content: center;
+}
+
+.hero-content {
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 40px;
+  text-align: left;
+}
+
+.hero-left {
+  flex: 1;
+  padding-top: 20px;
+}
+
+.pill-tag {
+  background: rgba(255, 255, 255, 0.2);
+  padding: 8px 16px;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  display: inline-block;
+  margin-bottom: 20px;
+}
+
+.hero-left h1 {
+  font-size: 3.5rem;
+  line-height: 1.2;
+  margin-bottom: 20px;
+  font-weight: 800;
+  color: white;
+}
+
+.hero-left p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  margin-bottom: 30px;
+  max-width: 500px;
+  line-height: 1.6;
+}
+
+.hero-actions {
+  display: flex;
+  gap: 15px;
+}
+
+.btn-primary {
+  background: #ffe3e3;
+  color: #d60000;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background: white;
+}
+
+.btn-secondary {
+  background: transparent;
+  color: white;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  padding: 12px 30px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn-secondary:hover {
+  border-color: white;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* --- URGENT CARDS --- */
+.hero-right {
+  flex: 0.8;
+  max-width: 500px;
+}
+
+.urgent-title {
+  margin-bottom: 20px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.urgent-card {
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.urgent-card-left {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+}
+
+.blood-circle {
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.9);
+  color: #ff3b3b;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.urgent-info {
+  text-align: left;
+}
+.urgent-info h4 {
+  margin: 0 0 5px 0;
+  font-size: 1rem;
+  color: white;
+}
+.time-text {
+  font-size: 0.8rem;
+  opacity: 0.9;
+  display: block;
+}
+.units-text {
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin: 5px 0 0 0;
+  opacity: 1;
+}
+
+.urgent-card-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.status-badge {
+  font-size: 0.7rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+.status-badge.critical {
+  background: rgba(0, 0, 0, 0.3);
+  color: #fff;
+}
+.status-badge.high {
+  background: rgba(0, 0, 0, 0.2);
+  color: #fff;
+}
+
+.respond-btn {
+  background: white;
+  color: #d60000;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+/* --- SEARCH SECTION --- */
+.search-section {
+  max-width: 1000px;
+  margin: -50px auto 50px auto;
+  position: relative;
+  z-index: 10;
+  padding: 0 20px;
+}
+
+.search-container {
+  background: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+.search-container h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.search-inputs {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.input-group {
+  flex: 2;
+  background: #f8f9fa;
+  padding: 0 15px;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  border: 1px solid #eee;
+  min-width: 250px;
+}
+
+.input-group input {
+  border: none;
+  background: transparent;
+  width: 100%;
+  padding: 15px 0;
+  outline: none;
+  font-size: 1rem;
+}
+
+.group-select {
+  flex: 1;
+  padding: 15px;
+  border-radius: 8px;
+  border: 1px solid #eee;
+  background: #fff;
+  min-width: 150px;
+  cursor: pointer;
+}
+
+.search-btn {
+  flex: 0.5;
+  background: #ff3b3b;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  min-width: 120px;
+  transition: 0.2s;
+}
+.search-btn:hover {
+  background: #e02e2e;
+}
+
+/* --- BANKS GRID --- */
+.banks-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px 80px 20px;
+  text-align: left;
+}
+
+.banks-section h2 {
+  color: #1a1a1a;
+  margin-bottom: 30px;
+}
+
+.banks-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+  gap: 30px;
+}
+
+.bank-card {
+  border: 1px solid #eef0f2;
+  border-radius: 16px;
+  padding: 24px;
+  background: white;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.02);
+}
+
+.bank-card:hover {
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.08);
+  transform: translateY(-5px);
+  border-color: #ffcccc;
+}
+
+.bank-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.bank-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.status-pill {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.status-pill.open {
+  background: #e6fcf5;
+  color: #0ca678;
+}
+.status-pill.closed {
+  background: #f1f3f5;
+  color: #868e96;
+}
+
+.bank-details p {
+  margin: 8px 0;
+  color: #555;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.address-text {
+  color: #888 !important;
+  font-size: 0.9rem !important;
+}
+
+.divider {
+  border: 0;
+  border-top: 1px solid #eee;
+  margin: 20px 0;
+}
+.bank-card h4 {
+  font-size: 0.95rem;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.blood-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.blood-item {
+  padding: 8px 4px;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.blood-item.good {
+  background: #e6fcf5;
+  color: #0ca678;
+}
+.blood-item.medium {
+  background: #fff9db;
+  color: #f08c00;
+}
+.blood-item.low {
+  background: #fff5f5;
+  color: #fa5252;
+}
+
+.b-type {
+  font-weight: 800;
+  font-size: 1rem;
+  margin-bottom: 2px;
+}
+.b-units {
+  font-size: 0.7rem;
+  font-weight: 500;
+}
+
+.view-details-btn {
+  width: 100%;
+  padding: 12px;
+  background: white;
+  border: 1px solid #eef0f2;
+  border-radius: 8px;
+  color: #333;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.view-details-btn:hover {
+  background: #f8f9fa;
+  border-color: #ddd;
+}
+
+/* --- BENEFITS SECTION --- */
+.benefits-section {
+  max-width: 1200px;
+  margin: 0 auto 50px auto;
+  padding: 60px 50px;
+  display: flex;
+  gap: 60px;
+  align-items: center;
+  background: #fff5f5;
+  border-radius: 24px;
+  flex-wrap: wrap;
+}
+
+.benefits-left {
+  flex: 1;
+  text-align: left;
+  min-width: 300px;
+}
+.pill-tag.red-bg {
+  background: #ffeded;
+  color: #ff3b3b;
+}
+
+.benefits-left h2 {
+  font-size: 2.2rem;
+  margin: 15px 0 30px 0;
+  color: #1a1a1a;
+}
+
+.benefits-list {
+  list-style: none;
+  padding: 0;
+}
+.benefits-list li {
+  margin-bottom: 20px;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  color: #444;
+}
+.check-icon {
+  color: #ff3b3b;
+  background: #ffeded;
+  padding: 5px;
+  border-radius: 50%;
+  font-size: 0.8rem;
+}
+
+.benefits-right {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  min-width: 300px;
+}
+
+.stat-card {
+  background: white;
+  padding: 30px 20px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.03);
+  transition: transform 0.3s;
+}
+.stat-card:hover {
+  transform: translateY(-5px);
+}
+
+.icon-box {
+  font-size: 2rem;
+  margin-bottom: 15px;
+  color: #ff3b3b;
+  display: inline-block;
+}
+
+.stat-card h3 {
+  font-size: 1.8rem;
+  margin: 0;
+  color: #1a1a1a;
+  font-weight: 800;
+}
+.stat-card p {
+  color: #666;
+  margin: 5px 0 0 0;
+  font-size: 0.9rem;
+}
+
+/* --- MODAL STYLES --- */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  backdrop-filter: blur(5px);
+  animation: fadeIn 0.3s ease-out;
+}
+
+/* Modal Box with PopIn Animation */
+.modal-content {
+  background: white;
+  padding: 30px;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.3);
+  text-align: left;
+  /* Entrance Animation: Pop In */
+  animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+  opacity: 0;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 15px;
+}
+
+.modal-header h2 {
+  margin: 0;
+  color: #333;
+}
+
+.close-btn {
+  background: #f1f3f5;
+  border: none;
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: 0.2s;
+}
+.close-btn:hover {
+  background: #ffcccc;
+  color: red;
+}
+
+.modal-body p {
+  font-size: 1.1rem;
+  color: #555;
+  margin: 10px 0;
+}
+.modal-body strong {
+  color: #333;
+}
+
+.modal-actions {
+  margin-top: 25px;
+  display: flex;
+  gap: 10px;
+}
+
+.call-btn,
+.directions-btn {
+  flex: 1;
+  padding: 12px;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.call-btn {
+  background: #ff3b3b;
+  color: white;
+}
+.directions-btn {
+  background: #333;
+  color: white;
+}
+
+/* --- ANIMATION KEYFRAMES (Definitions) --- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* 1. Pop In Animation (For Containers) */
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* 2. Floating Animation (For Icon - Continuous) */
+@keyframes floatIcon {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* --- NEW: NO RESULTS STATE (Compact + Animated) --- */
+.no-results-container {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px 20px; /* Small compact padding */
+  background: #f8fafc;
+  border-radius: 12px;
+  border: 2px dashed #e2e8f0;
+  color: #64748b;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* Triggers the zoom-in animation when it appears */
+  animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  margin-top: 20px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.no-results-icon {
+  font-size: 2rem;
+  margin-bottom: 12px;
+  color: #94a3b8;
+  background: #f1f5f9;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  /* Continuous floating animation makes it look alive */
+  animation: floatIcon 3s ease-in-out infinite;
+}
+
+.no-results-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #334155;
+  margin-bottom: 6px;
+}
+
+.no-results-text {
+  font-size: 0.9rem;
+  max-width: 380px;
+  line-height: 1.4;
+  margin-bottom: 20px;
+}
+
+.clear-search-btn {
+  background-color: #334155;
+  color: white;
+  border: none;
+  padding: 8px 20px;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.clear-search-btn:hover {
+  background-color: #0f172a;
+  transform: translateY(-2px);
+}

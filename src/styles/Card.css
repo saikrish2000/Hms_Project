@@ -1,0 +1,145 @@
+/* ===================================
+   CARD STYLES - Used across Dashboard, Appointments, Records
+   =================================== */
+
+/* Base card container - white rounded card with shadow */
+.card-shell {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.06);
+  /* Constrain width so layout remains uniform when sidebar toggles */
+  max-width: 980px;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Center card on larger screens */
+@media (min-width: 992px) {
+  .card-shell {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+/* Card row layout - flex container for card sides */
+.card-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Card left section - contains avatar and text content */
+.card-left {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+}
+
+/* Card avatar - circular image */
+.card-avatar {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Card title - main heading for card */
+.card-title {
+  font-weight: 600;
+}
+
+/* Card subtitle - secondary text */
+.card-sub {
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+/* Card metadata line - date, time, location info */
+.card-meta {
+  display: flex;
+  gap: 12px;
+  font-size: 0.85rem;
+  color: #6b7280;
+  margin-top: 6px;
+}
+
+/* Card actions - buttons container */
+.card-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+/* Base button outline style */
+.btn-outline {
+  background: transparent;
+  border: 1px solid #d1d5db;
+  color: #374151;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-outline:hover {
+  border-color: #2563eb;
+  color: #2563eb;
+}
+
+/* Danger text button */
+.btn-danger-text {
+  background: transparent;
+  border: none;
+  color: #dc2626;
+  cursor: pointer;
+  font-size: 0.85rem;
+  transition: color 0.2s ease;
+}
+
+.btn-danger-text:hover {
+  color: #991b1b;
+}
+
+/* Filter card - for search and filter sections */
+.filter-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+}
+
+/* Doctor avatar - larger circular image for doctor profiles */
+.doctor-avatar {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Badge statuses for appointment/record states */
+.badge-status {
+  padding: 4px 8px;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.badge-confirmed {
+  background: #d1fae5;
+  color: #065f46;
+}
+
+.badge-pending {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.badge-cancelled {
+  background: #fee2e2;
+  color: #991b1b;
+}

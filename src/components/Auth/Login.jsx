@@ -120,7 +120,10 @@ const Login = () => {
                 <hr className="my-4" />
 
                 <div className="d-flex justify-content-between align-items-center">
-                  <Link to="/" className="btn btn-outline-secondary">
+                  <Link
+                    to="/"
+                    className="text-decoration-none text-primary fw-bold"
+                  >
                     Back to Home
                   </Link>
                   <small className="text-muted">

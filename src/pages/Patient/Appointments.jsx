@@ -1,105 +1,66 @@
-import { useState } from "react";
-import { FiCalendar, FiClock, FiUser, FiTrendingUp } from "react-icons/fi";
+import PatientLayout from "../../components/Layout/PatientLayout";
+import { useNavigate } from "react-router-dom";
+import { MOCK_DOCTORS } from "../../data/doctors";
+import { useAppointments } from "../../context/AppointmentsContext";
 
 const PatientAppointments = () => {
-  // Mock appointments data
-  const [appointments] = useState([
-    {
-      id: 1,
-      doctorName: "Dr. Sarah Johnson",
-      specialty: "Cardiology",
-      date: "2026-02-10",
-      time: "10:00 AM",
-      status: "confirmed",
-      reason: "Heart checkup",
-    },
-    {
-      id: 2,
-      doctorName: "Dr. Michael Chen",
-      specialty: "Neurology",
-      date: "2026-02-15",
-      time: "2:00 PM",
-      status: "pending",
-      reason: "Consultation",
-    },
-  ]);
+  const navigate = useNavigate();
+  const { appointments: ctxAppointments } = useAppointments();
 
-  const getStatusBadge = (status) => {
-    switch (status) {
-      case "confirmed":
-        return <span className="badge bg-success">Confirmed</span>;
-      case "pending":
-        return <span className="badge bg-warning text-dark">Pending</span>;
-      case "completed":
-        return <span className="badge bg-info">Completed</span>;
-      case "cancelled":
-        return <span className="badge bg-danger">Cancelled</span>;
-      default:
-        return null;
-    }
+  const appointments = ctxAppointments.map((apt) => {
+    const doctor = MOCK_DOCTORS.find((d) => d.id === apt.doctorId);
+    return { ...apt, doctor };
+  });
+
+  const badgeClass = (status) => {
+    if (status === "confirmed") return "badge-confirmed";
+    if (status === "pending") return "badge-pending";
+    return "badge-cancelled";
   };
 
   return (
-    <div className="container py-5">
-      <h1 className="mb-5 fw-bold">My Appointments</h1>
+    <PatientLayout>
+      <h3 className="fw-bold mb-4">My Appointments</h3>
 
-      {appointments.length === 0 ? (
-        <div className="alert alert-info" role="alert">
-          <h5 className="alert-heading">No Appointments Yet</h5>
-          <p>
-            You haven't booked any appointments.{" "}
-            <a href="/patient/find-doctor">Find a doctor</a> to get started.
-          </p>
-        </div>
-      ) : (
-        <div className="row g-4">
-          {appointments.map((apt) => (
-            <div key={apt.id} className="col-md-6">
-              <div className="card shadow-sm border-0 h-100">
-                <div className="card-body">
-                  <div className="d-flex justify-content-between align-items-start mb-3">
-                    <div>
-                      <h5 className="card-title fw-bold mb-1">
-                        {apt.doctorName}
-                      </h5>
-                      <p className="text-primary small mb-0">{apt.specialty}</p>
-                    </div>
-                    {getStatusBadge(apt.status)}
-                  </div>
+      {appointments.map((apt) => (
+        <div key={apt.id} className="card-shell mb-3">
+          <div className="card-row">
+            <div className="card-left">
+              <img src={apt.doctor.photo} className="card-avatar" />
 
-                  <hr />
+              <div>
+                <div className="card-title">{apt.doctor.name}</div>
+                <div className="card-sub">{apt.doctor.specialty}</div>
 
-                  <div className="small text-muted">
-                    <p className="mb-2">
-                      <FiCalendar className="me-2" />
-                      <strong>Date:</strong>{" "}
-                      {new Date(apt.date).toLocaleDateString()}
-                    </p>
-                    <p className="mb-2">
-                      <FiClock className="me-2" />
-                      <strong>Time:</strong> {apt.time}
-                    </p>
-                    <p className="mb-3">
-                      <FiTrendingUp className="me-2" />
-                      <strong>Reason:</strong> {apt.reason}
-                    </p>
-                  </div>
-
-                  <div className="d-flex gap-2">
-                    <button className="btn btn-sm btn-outline-primary">
-                      Reschedule
-                    </button>
-                    <button className="btn btn-sm btn-outline-danger">
-                      Cancel
-                    </button>
-                  </div>
+                <div className="card-meta">
+                  <span>📅 {apt.date}</span>
+                  <span>⏰ {apt.time}</span>
+                  <span>📍 {apt.doctor.hospital}</span>
                 </div>
               </div>
             </div>
-          ))}
+
+            <div className="text-end">
+              <span className={`badge-status ${badgeClass(apt.status)}`}>
+                {apt.status}
+              </span>
+
+              <div className="card-actions mt-2">
+                <button
+                  className="btn-outline"
+                  onClick={() =>
+                    navigate(`/patient/book-appointment/${apt.doctor.id}`)
+                  }
+                >
+                  Reschedule
+                </button>
+                <button className="btn-danger-text">✕ Cancel</button>
+              </div>
+            </div>
+          </div>
         </div>
-      )}
-    </div>
+      ))}
+    </PatientLayout>
   );
 };
 

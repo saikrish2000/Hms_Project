@@ -1,36 +1,81 @@
-// Navbar.jsx
-import React from 'react';
-import { FaHeart, FaStethoscope, FaTint, FaAmbulance, FaSignInAlt, FaUserPlus } from 'react-icons/fa';
+// Navbar.jsx (resolved)
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useAuth } from "../../context/AuthContext";
+import { FaHeart } from "react-icons/fa";
+import { FiLogOut } from "react-icons/fi";
 
 const Navbar = () => {
-  return (
-    <nav className="navbar navbar-expand-lg py-3 shadow-sm" style={{ backgroundColor: '#e9f7ef' }}>
-      <div className="container">
-        <a className="navbar-brand d-flex align-items-center fw-bold text-success fs-4" href="#">
-          <div className="bg-primary rounded-3 p-2 me-2 shadow-sm d-flex align-items-center justify-content-center">
-            <FaHeart className="text-white fs-5" />
-          </div>
-          Health<span className="text-dark">Hub</span>
-        </a>
-        
-        <div className="collapse navbar-collapse justify-content-center">
-          <ul className="navbar-nav gap-3">
-            <li className="nav-item d-flex align-items-center"><FaStethoscope className="me-2 text-muted"/> Find Doctors</li>
-            <li className="nav-item d-flex align-items-center"><FaTint className="me-2 text-muted"/> Blood Donation</li>
-            <li className="nav-item bg-success bg-opacity-10 rounded-pill px-3 py-1 d-flex align-items-center text-success fw-semibold">
-              <FaHeart className="me-2"/> Organ Donation
-            </li>
-            <li className="nav-item d-flex align-items-center"><FaAmbulance className="me-2 text-muted"/> Emergency</li>
-          </ul>
-        </div>
+  const { user, isAuthenticated, logout } = useAuth();
+  const navigate = useNavigate();
 
-        <div className="d-flex align-items-center gap-4">
-          <a href="#" className="text-decoration-none text-dark fw-semibold d-flex align-items-center">
-            <FaSignInAlt className="me-2" /> Login
-          </a>
-          <button className="btn btn-success rounded-3 px-4 py-2 fw-bold d-flex align-items-center shadow-sm">
-            <FaUserPlus className="me-2" /> Register
-          </button>
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
+
+  return (
+    <nav className="navbar navbar-expand-lg navbar-light bg-white shadow-sm sticky-top">
+      <div className="container-fluid">
+        <Link to="/" className="navbar-brand d-flex align-items-center fw-bold text-primary">
+          <div className="me-2">
+            <FaHeart className="text-primary" />
+          </div>
+          HealthHub
+        </Link>
+
+        {user?.role !== "bloodbank" && (
+          <ul className="navbar-nav mx-auto d-flex flex-row gap-3 list-unstyled align-items-center mb-0">
+            <li className="nav-item">
+              <Link className="nav-link" to="/patient/find-doctor">
+                Find Doctor
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/patient/blood-donation">
+                Blood Bank
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/patient/organ-donation">
+                Organ Donation
+              </Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link text-danger fw-semibold" to="/emergency">
+                Emergency
+              </Link>
+            </li>
+          </ul>
+        )}
+
+        <div className="d-flex align-items-center gap-2 ms-auto">
+          {!isAuthenticated ? (
+            <>
+              <Link to="/login" className="btn btn-outline-primary me-2">
+                Login
+              </Link>
+              <Link to="/register" className="btn btn-primary text-white">
+                Register
+              </Link>
+            </>
+          ) : user?.role === "bloodbank" ? (
+            <button onClick={handleLogout} className="btn btn-outline-danger">
+              <FiLogOut className="me-1" /> Logout
+            </button>
+          ) : (
+            <>
+              <Link
+                to={user?.role === "patient" ? "/patient/profile" : `/${user?.role}/dashboard`}
+                className="btn btn-outline-primary me-2"
+              >
+                Profile
+              </Link>
+              <button onClick={handleLogout} className="btn btn-outline-danger">
+                Logout
+              </button>
+            </>
+          )}
         </div>
       </div>
     </nav>
