@@ -1,9 +1,5 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import { AuthProvider } from "./context/AuthContext";
 import Layout from "./components/Layout/Layout";
 
@@ -13,6 +9,8 @@ import Register from "./components/Auth/Register";
 
 // Common Pages
 import Home from "./pages/Home";
+import EmergencyDemo from "./pages/EmergencyDemo";
+import NotFound from "./pages/NotFound";
 
 // Patient Pages
 import PatientDashboard from "./pages/Patient/Dashboard";
@@ -32,9 +30,8 @@ import ManageInventory from "./pages/Bloodbank/ManageInventory";
 import AdminDashboard from "./pages/Admin/Dashboard";
 import UserManagement from "./pages/Admin/UserManagement";
 
-// 404
-import NotFound from "./pages/NotFound";
-import EmergencyDemo from "./pages/EmergencyDemo";
+// Organ Donation Page
+import OrganDonation from "./pages/OrganDonation/OrganDonation";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -42,15 +39,22 @@ import "./App.css";
 function App() {
   return (
     <AuthProvider>
-      <Router>
-        <Layout>
-          <Routes>
-            {/* Public Routes */}
+      <BrowserRouter>
+        <Routes>
+
+          {/* ===== Layout Wrapper ===== */}
+          <Route element={<Layout />}>
+
+            {/* ===== Public Routes ===== */}
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/emergency" element={<EmergencyDemo />} />
 
-            {/* Patient Routes */}
+            {/* 🫀 Organ Donation */}
+            <Route path="/organ-donation" element={<OrganDonation />} />
+
+            {/* ===== Patient Routes ===== */}
             <Route path="/patient/dashboard" element={<PatientDashboard />} />
             <Route path="/patient/find-doctor" element={<FindDoctor />} />
             <Route
@@ -62,32 +66,36 @@ function App() {
               element={<PatientAppointments />}
             />
 
-            {/* Doctor Routes */}
+            {/* ===== Doctor Routes ===== */}
             <Route path="/doctor/dashboard" element={<DoctorDashboard />} />
             <Route
               path="/doctor/appointments"
               element={<ManageAppointments />}
             />
 
-            {/* Blood Bank Routes */}
+            {/* ===== Blood Bank Routes ===== */}
             <Route
               path="/bloodbank/dashboard"
               element={<BloodbankDashboard />}
             />
-            <Route path="/bloodbank/inventory" element={<ManageInventory />} />
+            <Route
+              path="/bloodbank/inventory"
+              element={<ManageInventory />}
+            />
 
-            {/* Admin Routes */}
+            {/* ===== Admin Routes ===== */}
             <Route path="/admin/dashboard" element={<AdminDashboard />} />
             <Route path="/admin/users" element={<UserManagement />} />
 
-            {/* 404 */}
-            <Route path="/emergency" element={<EmergencyDemo />} />
+            {/* ===== 404 ===== */}
             <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Layout>
-      </Router>
+
+          </Route>
+        </Routes>
+      </BrowserRouter>
     </AuthProvider>
   );
 }
 
 export default App;
+  

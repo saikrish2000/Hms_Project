@@ -1,0 +1,74 @@
+/* Hero Background with vibrant green gradient */
+.hero-section {
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+    /* Exact green gradient */
+    padding-bottom: 120px !important;
+    /* Extra space for card overlap */
+}
+
+.btn-register {
+    background-color: #e9f7ef !important;
+    /* Soft mint color from design */
+    color: #1a1a1a !important;
+}
+
+/* Custom Badge styling */
+.badge-custom {
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    padding: 6px 18px;
+    border-radius: 50px;
+}
+
+/* The Overlap Trick: Pushing stats UP */
+.stats-container {
+    margin-top: -80px;
+    /* Pulls cards up into the green section */
+    position: relative;
+    z-index: 10;
+}
+
+.stat-card {
+    border: none !important;
+    border-radius: 20px !important;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05) !important;
+    /* Soft drop shadow */
+}
+
+/* Button Styling */
+/* Solid Register Button (Off-white/Mint) */
+.btn-register-now {
+    background-color: #e9f7ef !important;
+    /* Matches the light mint in image 2 */
+    color: #1a1a1a !important;
+    /* Dark text for contrast */
+    border: none !important;
+    padding: 12px 28px !important;
+    /* Balanced padding */
+    border-radius: 12px !important;
+    /* Soft rounded corners */
+    transition: all 0.3s ease;
+}
+
+.btn-register-now:hover {
+    background-color: #d4ede0 !important;
+    transform: translateY(-2px);
+}
+
+/* Outline Learn More Button (Transparent) */
+.btn-learn-more {
+    background-color: transparent !important;
+    border: 1px solid rgba(255, 255, 255, 0.6) !important;
+    /* Thin semi-transparent border */
+    color: white !important;
+    padding: 12px 28px !important;
+    border-radius: 12px !important;
+    transition: all 0.3s ease;
+}
+
+.btn-learn-more:hover {
+    background-color: rgba(255, 255, 255, 0.1) !important;
+    border-color: white !important;
+    transform: translateY(-2px);
+}
