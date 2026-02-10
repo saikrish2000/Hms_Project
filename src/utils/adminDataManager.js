@@ -1,6 +1,7 @@
 // Admin Data Management Utilities
 import { MOCK_DOCTORS } from "../data/doctors";
 import { MOCK_APPOINTMENTS } from "../data/appointments";
+import { getInventory as getBloodInventory, updateInventory as setBloodInventory } from "../data/bloodBank";
 
 // Initialize default admin data
 const initializeAdminData = () => {
@@ -256,22 +257,27 @@ export const getActivityLogs = (limit = 20) => {
 // ==================== BLOOD BANK ====================
 
 export const getBloodBankStats = () => {
-  const inventory = JSON.parse(localStorage.getItem("bloodInventory") || "{}");
+  const inventoryArr = getBloodInventory();
   const bloodTypes = ["O+", "O-", "A+", "A-", "B+", "B-", "AB+", "AB-"];
 
   const stats = {};
   bloodTypes.forEach((type) => {
-    stats[type] = inventory[type] || 0;
+    const item = inventoryArr.find((i) => i.type === type);
+    stats[type] = item ? item.units : 0;
   });
 
   return stats;
 };
 
 export const updateBloodInventory = (bloodType, quantity) => {
-  const inventory = JSON.parse(localStorage.getItem("bloodInventory") || "{}");
-  inventory[bloodType] = (inventory[bloodType] || 0) + quantity;
-  localStorage.setItem("bloodInventory", JSON.stringify(inventory));
-  return inventory;
+  // Use shared blood-bank data utilities so admin and bloodbank stay in sync.
+  const current = getBloodInventory();
+  const item = current.find((i) => i.type === bloodType);
+  const currentUnits = item ? item.units : 0;
+  const newUnits = currentUnits + quantity;
+  // `setBloodInventory` (from data/bloodBank) expects (type, units)
+  const updated = setBloodInventory(bloodType, newUnits);
+  return updated;
 };
 
 // ==================== REPORTS ====================

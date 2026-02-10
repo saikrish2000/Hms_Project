@@ -5,6 +5,7 @@
 
 import { MOCK_DOCTORS } from "../../data/doctors";
 import { MOCK_APPOINTMENTS, getAppointments } from "../../data/appointments";
+import { getInventory as getBloodInventory } from "../../data/bloodBank";
 import { PRESCRIPTIONS } from "../../data/medicalData";
 
 /**
@@ -190,16 +191,17 @@ export const getHospitalSummary = async (filters = {}) => {
 export const getBloodInventorySummary = async () => {
   return new Promise((resolve) => {
     setTimeout(() => {
-      resolve({
-        "O+": { units: 245, lowThreshold: 50 },
-        "O-": { units: 89, lowThreshold: 30 },
-        "A+": { units: 156, lowThreshold: 50 },
-        "A-": { units: 45, lowThreshold: 30 },
-        "B+": { units: 178, lowThreshold: 50 },
-        "B-": { units: 32, lowThreshold: 30 },
-        "AB+": { units: 67, lowThreshold: 30 },
-        "AB-": { units: 12, lowThreshold: 20 },
+      const inventory = getBloodInventory();
+      const map = {};
+      inventory.forEach((item) => {
+        // derive a sensible lowThreshold from status
+        let lowThreshold = 30;
+        if (item.status === "critical") lowThreshold = 10;
+        else if (item.status === "low") lowThreshold = 20;
+        else if (item.status === "good") lowThreshold = 50;
+        map[item.type] = { units: item.units, lowThreshold };
       });
+      resolve(map);
     }, 300);
   });
 };
