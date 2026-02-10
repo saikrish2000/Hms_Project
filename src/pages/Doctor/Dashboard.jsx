@@ -1,105 +1,62 @@
 import { useAuth } from "../../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import DoctorLayout from "../../components/Layout/DoctorLayout";
-import {
-  BsCalendarCheck,
-  BsClockHistory,
-  BsPeople,
-  BsClipboardPulse,
-  BsFileEarmarkText,
-  BsCapsule
-} from "react-icons/bs";
-import "./DoctorDashboard.css";
+import { FiLogOut } from "react-icons/fi";
 
 const DoctorDashboard = () => {
-  const { logout } = useAuth();
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
 
   return (
-    <DoctorLayout>
-      <div className="doctor-dashboard container-fluid py-4">
-      {/* Header */}
-      <div className="mb-4">
-        <h1 className="fw-bold">Doctor Dashboard</h1>
-        <p className="text-muted">
-          Manage your appointments and patient consultations
-        </p>
+    <div className="container py-5">
+      <div className="d-flex justify-content-between align-items-center mb-4">
+        <h1 className="mb-0">Doctor Dashboard</h1>
+        <button className="btn btn-outline-secondary" onClick={handleLogout}>
+          <FiLogOut className="me-1" /> Logout
+        </button>
       </div>
-
-      {/* Stats Cards */}
-      <div className="row g-4 mb-4">
-        <StatCard
-          icon={<BsCalendarCheck />}
-          value="12"
-          label="Today's Appointments"
-          color="primary"
-        />
-        <StatCard
-          icon={<BsClockHistory />}
-          value="5"
-          label="Pending Requests"
-          color="warning"
-        />
-        <StatCard
-          icon={<BsPeople />}
-          value="248"
-          label="Total Patients"
-          color="success"
-        />
-        <StatCard
-          icon={<BsClipboardPulse />}
-          value="87"
-          label="Consultations"
-          color="info"
-        />
+      <div className="row">
+        <div className="col-md-3 mb-4">
+          <div className="card text-center shadow-sm border-0">
+            <div className="card-body">
+              <h3 className="fw-bold text-primary">12</h3>
+              <p className="text-muted">Today's Appointments</p>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-3 mb-4">
+          <div className="card text-center shadow-sm border-0">
+            <div className="card-body">
+              <h3 className="fw-bold text-success">8</h3>
+              <p className="text-muted">Completed</p>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-3 mb-4">
+          <div className="card text-center shadow-sm border-0">
+            <div className="card-body">
+              <h3 className="fw-bold text-warning">4</h3>
+              <p className="text-muted">Pending</p>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-3 mb-4">
+          <div className="card text-center shadow-sm border-0">
+            <div className="card-body">
+              <h3 className="fw-bold text-info">24</h3>
+              <p className="text-muted">Patient Records</p>
+            </div>
+          </div>
+        </div>
       </div>
-
-      {/* Action Cards */}
-      <div className="row g-4">
-        <ActionCard
-          icon={<BsCalendarCheck />}
-          title="Today's Appointments"
-          desc="View scheduled consultations"
-        />
-        <ActionCard
-          icon={<BsPeople />}
-          title="Patient Records"
-          desc="Access patient information"
-        />
-        <ActionCard
-          icon={<BsCapsule />}
-          title="Prescribe Medication"
-          desc="Create new prescription"
-        />
-        <ActionCard
-          icon={<BsFileEarmarkText />}
-          title="Lab Results"
-          desc="Review test reports"
-        />
-      </div>
+      <p className="text-muted mt-4">
+        Manage your appointments and patient records from here.
+      </p>
     </div>
-    </DoctorLayout>
   );
 };
-
-const StatCard = ({ icon, value, label, color }) => (
-  <div className="col-md-3">
-    <div className="card stat-card shadow-sm border-0">
-      <div className={`stat-icon text-${color}`}>{icon}</div>
-      <h3 className={`fw-bold text-${color}`}>{value}</h3>
-      <p className="text-muted mb-0">{label}</p>
-    </div>
-  </div>
-);
-
-const ActionCard = ({ icon, title, desc }) => (
-  <div className="col-md-3">
-    <div className="card action-card h-100">
-      <div className="action-icon">{icon}</div>
-      <h5 className="fw-semibold mt-3">{title}</h5>
-      <p className="text-muted">{desc}</p>
-    </div>
-  </div>
-);
 
 export default DoctorDashboard;
