@@ -14,6 +14,16 @@
   height: 100vh;
 }
 
+/* Hide scrollbar for sidebar while keeping scroll functionality */
+.patient-sidebar::-webkit-scrollbar {
+  display: none;
+}
+
+.patient-sidebar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 /* Collapsed sidebar state - narrow version */
 .patient-sidebar.collapsed {
   width: 64px;
@@ -42,6 +52,12 @@ main {
   display: flex;
   align-items: center;
   gap: 8px;
+}
+
+/* Sidebar title styling */
+.patient-sidebar .sidebar-title {
+  color: #ffffff;
+  margin: 0;
 }
 
 /* Toggle button styling */

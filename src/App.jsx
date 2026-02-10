@@ -28,9 +28,11 @@ import DoctorDashboard from "./pages/Doctor/Dashboard";
 import ManageAppointments from "./pages/Doctor/ManageAppointments";
 
 // Blood Bank
-import BloodbankDashboard from "./pages/Bloodbank/BloodBankDashboard";
+import BloodBankDashboard from "./pages/Bloodbank/Dashboard";
 import ManageInventory from "./pages/Bloodbank/ManageInventory";
-import UrgentRequestCard from "./pages/Bloodbank/UrgentRequestCard";
+import UrgentRequests from "./pages/Bloodbank/UrgentRequests";
+import Donors from "./pages/Bloodbank/Donors";
+import BloodBankProfile from "./pages/Bloodbank/Profile";
 
 // Admin
 import AdminDashboard from "./pages/Admin/Dashboard";
@@ -126,7 +128,7 @@ function App() {
               path="/bloodbank/dashboard"
               element={
                 <ProtectedRoute allowedRoles={["bloodbank"]}>
-                  <BloodbankDashboard />
+                  <BloodBankDashboard />
                 </ProtectedRoute>
               }
             />
@@ -142,7 +144,23 @@ function App() {
               path="/bloodbank/urgent-requests"
               element={
                 <ProtectedRoute allowedRoles={["bloodbank"]}>
-                  <UrgentRequestCard />
+                  <UrgentRequests />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/bloodbank/donors"
+              element={
+                <ProtectedRoute allowedRoles={["bloodbank"]}>
+                  <Donors />
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/bloodbank/profile"
+              element={
+                <ProtectedRoute allowedRoles={["bloodbank"]}>
+                  <BloodBankProfile />
                 </ProtectedRoute>
               }
             />

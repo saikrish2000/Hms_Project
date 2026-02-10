@@ -20,38 +20,11 @@ const Navbar = () => {
           <span className="me-2">🏥</span>HealthHub
         </Link>
 
-        {/* CENTER: Navigation Links (ROLE-SPECIFIC) */}
-        {isAuthenticated && user?.role === "admin" ? (
-          // Admin Navigation - Empty (no nav links for admin)
-          <ul className="navbar-nav mx-auto"></ul>
-        ) : (
-          // Patient/Public Navigation
-          <ul className="navbar-nav mx-auto">
-            <li className="nav-item">
-              <Link className="nav-link" to="/patient/find-doctor">
-                Find Doctor
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/patient/blood-donation">
-                Blood Bank
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/patient/organ-donation">
-                Organ Donation
-              </Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link text-danger fw-semibold" to="/emergency">
-                Emergency
-              </Link>
-            </li>
-          </ul>
-        )}
+        {/* CENTER */}
+        <ul className="navbar-nav mx-auto"></ul>
 
-        {/* RIGHT: Auth */}
-        <div className="d-flex align-items-center gap-2">
+        {/* RIGHT */}
+        <div className="d-flex align-items-center gap-2 ms-auto">
           {!isAuthenticated && (
             <>
               <Link to="/login" className="btn btn-outline-primary">
@@ -69,14 +42,11 @@ const Navbar = () => {
                 to={
                   user?.role === "patient"
                     ? "/patient/profile"
-                    : user?.role === "admin"
-                    ? "/admin/dashboard"
                     : `/${user?.role}/dashboard`
                 }
                 className="btn btn-outline-primary"
               >
-                <FiUser className="me-1" />
-                {user?.name?.split(" ")[0] || "Profile"}
+                Profile
               </Link>
               <button onClick={handleLogout} className="btn btn-outline-danger">
                 Logout
