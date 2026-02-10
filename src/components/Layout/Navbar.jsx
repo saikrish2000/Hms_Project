@@ -29,7 +29,7 @@ const Navbar = () => {
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="/patient/blood-donation">
-              Blood Bank
+              Blood Bank 
             </Link>
           </li>
           <li className="nav-item">

@@ -242,7 +242,7 @@
     "B+": { "available": "number", "reserved": "number", "expired": "number" },
     "B-": { "available": "number", "reserved": "number", "expired": "number" },
     "AB+": { "available": "number", "reserved": "number", "expired": "number" },
-    "AB-": { "available": "number", "reserved": "number", "expired": "number" }
+    "AB-": { "available": "number", "reserved": "number", "expired": "number" }   
   },
   "donations": "array of donation ids",
   "requests": "array of request ids",
