@@ -15,10 +15,9 @@ import {
 } from "react-icons/fi";
 import { useBloodBank } from "../../context/BloodBankContext";
 import { useAuth } from "../../context/AuthContext";
-import { Chart as ChartJS, ArcElement, CategoryScale, LinearScale, BarElement, Legend, Tooltip } from "chart.js";
+import ChartJS from "chart.js/auto";
 import { Pie, Bar } from "react-chartjs-2";
 
-ChartJS.register(ArcElement, CategoryScale, LinearScale, BarElement, Legend, Tooltip);
 
 const BloodBankDashboard = () => {
   const navigate = useNavigate();

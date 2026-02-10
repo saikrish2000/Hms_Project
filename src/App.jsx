@@ -1,9 +1,5 @@
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Navigate,
-} from "react-router-dom";
+/* eslint-disable no-unused-vars */
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
 import Layout from "./components/Layout/Layout";
 import ProtectedRoute from "./components/ProtectedRoute";
@@ -16,6 +12,7 @@ import Register from "./components/Auth/Register";
 import Home from "./pages/Home";
 import EmergencyDemo from "./pages/EmergencyDemo";
 import NotFound from "./pages/NotFound";
+import OrganDonation from "./pages/OrganDonation/OrganDonation";
 
 // Patient
 import PatientDashboard from "./pages/Patient/Dashboard";
@@ -33,17 +30,10 @@ import ManageAppointments from "./pages/Doctor/ManageAppointments";
 // Blood Bank
 import BloodBankDashboard from "./pages/Bloodbank/Dashboard";
 import ManageInventory from "./pages/Bloodbank/ManageInventory";
-import UrgentRequests from "./pages/Bloodbank/UrgentRequests";
-import Donors from "./pages/Bloodbank/Donors";
-import BloodBankProfile from "./pages/Bloodbank/Profile";
 
 // Admin
 import AdminDashboard from "./pages/Admin/Dashboard";
 import UserManagement from "./pages/Admin/UserManagement";
-
-// 404
-import NotFound from "./pages/NotFound";
-import EmergencyDemo from "./pages/EmergencyDemo";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
@@ -61,12 +51,14 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path="/emergency" element={<EmergencyDemo />} />
 
-            {/* 🫀 Organ Donation */}
+            {/* Organ Donation */}
             <Route path="/organ-donation" element={<OrganDonation />} />
 
             {/* Patient Routes */}
             <Route path="/patient/dashboard" element={<PatientDashboard />} />
             <Route path="/patient/find-doctor" element={<FindDoctor />} />
+            <Route path="/patient/book-appointment/:doctorId" element={<BookAppointment />} />
+            <Route path="/patient/appointments" element={<PatientAppointments />} />
 
             <Route
               path="/patient/records"
@@ -84,16 +76,6 @@ function App() {
                   <PatientProfile />
                 </ProtectedRoute>
               }
-            />
-
-            {/* ✅ PUBLIC: Show booking form, auth check happens on submit */}
-            <Route
-              path="/patient/book-appointment/:doctorId"
-              element={<BookAppointment />}
-            />
-            <Route
-              path="/patient/appointments"
-              element={<PatientAppointments />}
             />
 
             {/* Doctor Routes */}
@@ -123,12 +105,10 @@ function App() {
             <Route path="/admin/users" element={<UserManagement />} />
 
             {/* 404 */}
-            <Route path="/emergency" element={<EmergencyDemo />} />
             <Route path="*" element={<NotFound />} />
-
-          </Route>
-        </Routes>
-      </BrowserRouter>
+          </Routes>
+        </Layout>
+      </Router>
     </AuthProvider>
   );
 }
